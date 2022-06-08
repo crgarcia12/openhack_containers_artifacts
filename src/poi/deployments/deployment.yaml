@@ -23,6 +23,13 @@ spec:
         - containerPort: 80
           name: http
           protocol: TCP
+        volumeMounts:
+          - name: secrets-files
+            mountPath: /secrets
+      volumes:
+        - name: secrets-files
+          secret:
+            secretName: sqlinfo
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 0
