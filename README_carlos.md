@@ -16,3 +16,4 @@ Challenge 2
 1. check all pods
 
 curl 20.23.118.171/api/poi/healthcheck
+curl 20.23.118.171/api/poi/healthcheck

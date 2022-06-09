@@ -46,7 +46,7 @@ spec:
           - name: DEBUG_LOGGING
             value: "true"
           - name: OPENAPI_DOCS_URI
-            value: "$(TRIPS_SERVICE_HOST)"
+            value: "http://$(TRIPS_SERVICE_HOST)"
       volumes:
         - name: secrets-files
           secret:
