@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: trips
+  namespace: api
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: trips
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trips
+  namespace: api
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: trips
+  template:
+    metadata:
+      labels:
+        app: trips
+      namespace: api
+    spec:
+      containers:
+      - name: trips
+        image: registryyib2999.azurecr.io/trips:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        volumeMounts:
+          - name: secrets-files
+            mountPath: /secrets
+        env:
+          - name: DEBUG_LOGGING
+            value: "true"
+          - name: OPENAPI_DOCS_URI
+            value: "http://$(TRIPS_SERVICE_HOST)"
+      volumes:
+        - name: secrets-files
+          secret:
+            secretName: sqlinfo
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 0
