@@ -56,3 +56,9 @@ $SQL_USER = "sqladminyIb2999"
 az keyvault secret set --vault-name $KEYVAULT_NAME -n SQLSERVER --value "$SQL_SERVER"
 az keyvault secret set --vault-name $KEYVAULT_NAME -n SQLUSER --value "$SQL_USER"
 az keyvault secret set --vault-name $KEYVAULT_NAME -n SQLPASSWORD --value "$SQL_PASSWORD"
+
+# Allow Secrets Provider id to get secrets
+az keyvault set-policy -n $KEYVAULT_NAME --secret-permissions get --spn $SECRETS_PROVIDER_IDENTITY
+
+k delete -f ..\challenge-3\yaml\secrets.yaml
+k apply -f secrets.yaml

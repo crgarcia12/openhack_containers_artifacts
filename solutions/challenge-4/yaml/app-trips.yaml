@@ -49,8 +49,11 @@ spec:
             value: "http://$(TRIPS_SERVICE_HOST)"
       volumes:
         - name: secrets-files
-          secret:
-            secretName: sqlinfo
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: keyvault-sql
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 0
