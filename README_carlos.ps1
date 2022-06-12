@@ -34,7 +34,8 @@ az aks create --name teamResources-private-aks `
               --aad-tenant-id 70cf8c0f-facf-4cc3-9177-63c03dd53c13 `
               --vnet-subnet-id "/subscriptions/4aa8f62c-835f-416e-9170-634235763a69/resourceGroups/teamResources/providers/Microsoft.Network/virtualNetworks/vnet/subnets/aks-subnet" `
               --zones 1 2 3 `
-              --enable-private-cluster `
+              --
+              # --enable-private-cluster `
               --enable-managed-identity `
               --private-dns-zone none `
               --attach-acr registryyib2999
