@@ -1,0 +1,13 @@
+grafana:
+  adminPassword: "YourPass123#"
+  deploymentStrategy:
+    type: Recreate
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: hostpath
+    accessModes:
+    - ReadWriteOnce
+    size: 3Gi
+    finalizers:
+    - kubernetes.io/pvc-protection 
